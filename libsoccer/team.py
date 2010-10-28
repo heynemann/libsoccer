@@ -1,12 +1,17 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
-import random
+'''
+Module responsible for representing a team
+'''
 
-from libsoccer.names import random_name
-from libsoccer.player import Player, GoalKeeper, Defender, Wing, Midfielder, Striker
+from libsoccer.player import Player, GoalKeeper, Defender
+from libsoccer.player import Wing, Midfielder, Striker
 
 class Team(object):
+    '''
+    Model that represents a team with its starters and substitutes.
+    '''
     def __init__(self, name, starters, substitutes):
         self.name = name
         self.starters = starters
@@ -26,7 +31,16 @@ class Team(object):
         return u''.join(text)
 
     @classmethod
-    def generate(cls, name, starters=None, starter_skill=50, substitutes=None, substitutes_skill=35):
+    def generate(cls,
+                 name,
+                 starters=None,
+                 starter_skill=50,
+                 substitutes=None,
+                 substitutes_skill=35):
+        '''
+        Generates a team with the number of specified players
+        and skills ranging around the specified skills.
+        '''
         positions = [GoalKeeper, Defender, Wing, Midfielder, Striker]
 
         if not starters:
@@ -41,12 +55,18 @@ class Team(object):
         current_number = 1
         for position, number_of_players in enumerate(starters):
             for player_index in range(number_of_players):
-                generated_starters.append(Player.generate(positions[position], current_number, starter_skill))
+                player = Player.generate(positions[position],
+                                         current_number,
+                                         starter_skill)
+                generated_starters.append(player)
                 current_number += 1
 
         for position, number_of_players in enumerate(substitutes):
             for player_index in range(number_of_players):
-                generated_substitutes.append(Player.generate(positions[position], current_number, substitutes_skill))
+                player = Player.generate(positions[position],
+                                         current_number,
+                                         substitutes_skill)
+                generated_substitutes.append(player)
                 current_number += 1
 
         return Team(name, generated_starters, generated_substitutes)

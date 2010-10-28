@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
+'''
+Module for generating random names.
+'''
+
 import random
 
 FIRST_NAMES = (u'Aahbran',
@@ -3555,6 +3559,9 @@ LAST_NAMES = (u'Abreu',
     u'Zvang')
 
 def random_name():
+    '''
+    Generates a tuple with first and last names.
+    '''
     first_name = random.choice(FIRST_NAMES)
     last_name = random.choice(LAST_NAMES)
 

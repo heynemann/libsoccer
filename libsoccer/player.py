@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 #-*- coding:utf-8 -*-
 
+'''
+Module responsible for simulating players.
+'''
+
 # Goleiro-Goalkeeper
 # Zagueiro- Center Back
 # Lateral direito;Lateral Esquerdo Jogando atrás - Full Back
@@ -18,16 +22,19 @@ import random
 from libsoccer.names import random_name
 
 class Player(object):
+    '''
+    Abstract Player class.
+    '''
     attributes = ('speed', 'agility', 'stamina', 'offense', 'defense')
 
-    def __init__(self, name, number, speed, agility, stamina, offense, defense):
-        self.name = name
-        self.number = number
-        self.speed = speed
-        self.agility = agility
-        self.stamina = stamina
-        self.offense = offense
-        self.defense = defense
+    def __init__(self, **kw):
+        self.name = kw['name']
+        self.number = kw['number']
+        self.speed = kw['speed']
+        self.agility = kw['agility']
+        self.stamina = kw['stamina']
+        self.offense = kw['offense']
+        self.defense = kw['defense']
 
     def __str__(self):
         text = ['[',
@@ -51,6 +58,7 @@ class Player(object):
 
     @classmethod
     def generate(cls, number, median=50, offset_size=2):
+        '''Generates a player for the given class'''
         attributes = {
             'name': "%s %s" % random_name(),
             'number': number,
@@ -66,7 +74,8 @@ class Player(object):
                 offset_down = -2 * offset_size
                 offset_up = 7 * offset_size
 
-            attr_value = random.randint(median - offset_down, median + offset_up)
+            attr_value = random.randint(median - offset_down,
+                                        median + offset_up)
 
             if index == 7:
                 attr_value = total_points
@@ -79,6 +88,10 @@ class Player(object):
         return cls(**attributes)
 
 class GoalKeeper(Player):
+    '''
+    Model that represents a goal keeper
+    '''
+
     attributes = ('jumping',
                   'anticipation',
                   'positioning',
@@ -88,24 +101,24 @@ class GoalKeeper(Player):
                   'speed',
                   'offense')
 
-    def __init__(self,
-                 name,
-                 number,
-                 speed,
-                 agility,
-                 stamina,
-                 offense,
-                 defense,
-                 anticipation,
-                 positioning,
-                 jumping):
-        super(GoalKeeper, self).__init__(name, number, speed, agility, stamina, offense, defense)
+    def __init__(self, **kw):
+        super(GoalKeeper, self).__init__(name=kw['name'],
+                                         number=kw['number'],
+                                         speed=kw['speed'],
+                                         agility=kw['agility'],
+                                         stamina=kw['stamina'],
+                                         offense=kw['offense'],
+                                         defense=kw['defense'])
 
-        self.anticipation = anticipation
-        self.positioning = positioning
-        self.jumping = jumping
+        self.anticipation = kw['anticipation']
+        self.positioning = kw['positioning']
+        self.jumping = kw['jumping']
 
 class Defender(Player):
+    '''
+    Model that represents a goal defender
+    '''
+
     attributes = ('marking',
                   'movement',
                   'stealing',
@@ -115,24 +128,24 @@ class Defender(Player):
                   'agility',
                   'offense')
 
-    def __init__(self,
-                 name,
-                 number,
-                 speed,
-                 agility,
-                 stamina,
-                 offense,
-                 defense,
-                 movement,
-                 marking,
-                 stealing):
-        super(Defender, self).__init__(name, number, speed, agility, stamina, offense, defense)
+    def __init__(self, **kw):
+        super(Defender, self).__init__(name=kw['name'],
+                                       number=kw['number'],
+                                       speed=kw['speed'],
+                                       agility=kw['agility'],
+                                       stamina=kw['stamina'],
+                                       offense=kw['offense'],
+                                       defense=kw['defense'])
 
-        self.movement = movement
-        self.marking = marking
-        self.stealing = stealing
+        self.movement = kw['movement']
+        self.marking = kw['marking']
+        self.stealing = kw['stealing']
 
 class Wing(Player):
+    '''
+    Model that represents a wing
+    '''
+
     attributes = ('progression',
                   'crossing',
                   'dribbling',
@@ -142,24 +155,24 @@ class Wing(Player):
                   'defense',
                   'agility')
 
-    def __init__(self,
-                 name,
-                 number,
-                 speed,
-                 agility,
-                 stamina,
-                 offense,
-                 defense,
-                 progression,
-                 crossing,
-                 dribbling):
-        super(Wing, self).__init__(name, number, speed, agility, stamina, offense, defense)
+    def __init__(self, **kw):
+        super(Wing, self).__init__(name=kw['name'],
+                                   number=kw['number'],
+                                   speed=kw['speed'],
+                                   agility=kw['agility'],
+                                   stamina=kw['stamina'],
+                                   offense=kw['offense'],
+                                   defense=kw['defense'])
 
-        self.progression = progression
-        self.crossing = crossing
-        self.dribbling = dribbling
+        self.progression = kw['progression']
+        self.crossing = kw['crossing']
+        self.dribbling = kw['dribbling']
 
 class Midfielder(Player):
+    '''
+    Model that represents a midfielder
+    '''
+
     attributes = ('passing',
                   'arming',
                   'marking',
@@ -169,25 +182,25 @@ class Midfielder(Player):
                   'defense',
                   'agility')
 
-    def __init__(self,
-                 name,
-                 number,
-                 speed,
-                 agility,
-                 stamina,
-                 offense,
-                 defense,
-                 marking,
-                 passing,
-                 arming):
+    def __init__(self, **kw):
 
-        super(Midfielder, self).__init__(name, number, speed, agility, stamina, offense, defense)
+        super(Midfielder, self).__init__(name=kw['name'],
+                                         number=kw['number'],
+                                         speed=kw['speed'],
+                                         agility=kw['agility'],
+                                         stamina=kw['stamina'],
+                                         offense=kw['offense'],
+                                         defense=kw['defense'])
 
-        self.marking = marking
-        self.passing = passing
-        self.arming = arming
+        self.marking = kw['marking']
+        self.passing = kw['passing']
+        self.arming = kw['arming']
 
 class Striker(Player):
+    '''
+    Model that represents a striker
+    '''
+
     attributes = ('kicking',
                   'heading',
                   'dribbling',
@@ -197,20 +210,15 @@ class Striker(Player):
                   'speed',
                   'defense')
 
-    def __init__(self,
-                 name,
-                 number,
-                 speed,
-                 agility,
-                 stamina,
-                 offense,
-                 defense,
-                 kicking,
-                 dribbling,
-                 heading):
-        super(Striker, self).__init__(name, number, speed, agility, stamina, offense, defense)
+    def __init__(self, **kw):
+        super(Striker, self).__init__(name=kw['name'],
+                                      number=kw['number'],
+                                      speed=kw['speed'],
+                                      agility=kw['agility'],
+                                      stamina=kw['stamina'],
+                                      offense=kw['offense'],
+                                      defense=kw['defense'])
 
-        self.kicking = kicking
-        self.dribbling = dribbling
-        self.heading = heading
-
+        self.kicking = kw['kicking']
+        self.dribbling = kw['dribbling']
+        self.heading = kw['heading']
