@@ -17,8 +17,7 @@ Module responsible for simulating players.
 # Centroavante - Centre forward
 # Tecnico - Coach
 
-import random
-
+from libsoccer.dice import randint
 from libsoccer.names import random_name
 
 class Player(object):
@@ -74,8 +73,8 @@ class Player(object):
                 offset_down = -2 * offset_size
                 offset_up = 7 * offset_size
 
-            attr_value = random.randint(median - offset_down,
-                                        median + offset_up)
+            attr_value = randint(median - offset_down,
+                                 median + offset_up)
 
             if index == 7:
                 attr_value = total_points
