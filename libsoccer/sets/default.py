@@ -7,3 +7,5 @@ class DefaultRuleSet(RuleSet):
     def __init__(self, game):
         super(DefaultRuleSet, self).__init__(game)
         self.positions = range(10)
+        self.starting_side = RuleSet.DEFENSE
+        self.starting_position = 8

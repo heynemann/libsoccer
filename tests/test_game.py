@@ -29,3 +29,15 @@ class TestGame(unittest.TestCase):
     def test_game_creates_ruleset_instance(self):
         assert self.game.ruleset
         assert self.game.ruleset.__class__ == DefaultRuleSet
+
+    def test_game_starting_position_comes_from_ruleset(self):
+        assert self.game.position == self.game.ruleset.starting_position
+
+    #imagine all the people
+    def test_game_starts_with_no_possession(self):
+        assert not self.game.possession
+
+    def test_assert_after_game_start_some_team_has_possession(self):
+        self.game.start()
+        assert self.game.possession == self.team1 or \
+               self.game.possession == self.team2
