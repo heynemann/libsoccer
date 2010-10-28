@@ -3,8 +3,8 @@
 
 import unittest
 
-from libsoccer.players import Player
-from libsoccer.players import GoalKeeper, Defender, Wing, Midfielder, Striker
+from libsoccer.player import Player
+from libsoccer.player import GoalKeeper, Defender, Wing, Midfielder, Striker
 
 class TestPlayer(unittest.TestCase):
 
