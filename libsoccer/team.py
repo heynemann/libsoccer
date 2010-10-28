@@ -17,6 +17,29 @@ class Team(object):
         self.starters = starters
         self.substitutes = substitutes
 
+    @property
+    def goalkeeper(self):
+        return self.players_for(GoalKeeper)[0]
+
+    @property
+    def defenders(self):
+        return self.players_for(Defender)
+
+    @property
+    def wings(self):
+        return self.players_for(Wing)
+
+    @property
+    def midfielders(self):
+        return self.players_for(Midfielder)
+
+    @property
+    def strikers(self):
+        return self.players_for(Striker)
+
+    def players_for(self, position):
+        return [player for player in self.starters if player.__class__ == position]
+
     def __str__(self):
         text = [self.name,
                 '\nStarter Players:\n\n']
@@ -55,17 +78,13 @@ class Team(object):
         current_number = 1
         for position, number_of_players in enumerate(starters):
             for player_index in range(number_of_players):
-                player = Player.generate(positions[position],
-                                         current_number,
-                                         starter_skill)
+                player = positions[position].generate(current_number, starter_skill)
                 generated_starters.append(player)
                 current_number += 1
 
         for position, number_of_players in enumerate(substitutes):
             for player_index in range(number_of_players):
-                player = Player.generate(positions[position],
-                                         current_number,
-                                         substitutes_skill)
+                player = positions[position].generate(current_number, substitutes_skill)
                 generated_substitutes.append(player)
                 current_number += 1
 

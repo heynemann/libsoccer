@@ -42,3 +42,28 @@ class TestTeam(unittest.TestCase):
         assert 'Concha Dourada FC' in team_str
         assert '\nStarter Players:\n\n' in team_str
         assert '\nSubstitutes:\n\n' in team_str
+
+    def test_get_goalkeeper(self):
+        team = Team.generate('Concha Dourada FC')
+
+        assert team.goalkeeper == team.starters[0]
+
+    def test_get_defenders(self):
+        team = Team.generate('Concha Dourada FC')
+
+        assert len(team.defenders) == 2
+
+    def test_get_wings(self):
+        team = Team.generate('Concha Dourada FC')
+
+        assert len(team.wings) == 2
+
+    def test_get_midfielders(self):
+        team = Team.generate('Concha Dourada FC')
+
+        assert len(team.midfielders) == 3
+
+    def test_get_strikers(self):
+        team = Team.generate('Concha Dourada FC')
+
+        assert len(team.strikers) == 3
