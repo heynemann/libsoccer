@@ -8,10 +8,11 @@ from libsoccer.sets.default import DefaultRuleSet
 class TestDefaultRuleSet(unittest.TestCase):
 
     def setUp(self):
-        self.rule_set = DefaultRuleSet()
+        self.rule_set = DefaultRuleSet(game="game")
 
     def test_can_create_default_ruleset(self):
         assert self.rule_set
+        assert self.rule_set.game == "game"
 
     def test_default_ruleset_positions(self):
         assert self.rule_set.positions
