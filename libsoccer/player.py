@@ -36,6 +36,9 @@ class Player(object):
         self.defense = kw['defense']
 
     def __str__(self):
+        return unicode(self)
+
+    def __unicode__(self):
         text = ['[',
                 self.__class__.__name__,
                 '] ',

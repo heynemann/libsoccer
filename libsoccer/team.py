@@ -41,14 +41,17 @@ class Team(object):
         return [player for player in self.starters if player.__class__ == position]
 
     def __str__(self):
+        return unicode(self)
+
+    def __unicode__(self):
         text = [self.name,
                 '\nStarter Players:\n\n']
         for player in self.starters:
-            text.append(str(player))
+            text.append(unicode(player))
             text.append('\n')
         text.append('\nSubstitutes:\n\n')
         for player in self.substitutes:
-            text.append(str(player))
+            text.append(unicode(player))
             text.append('\n')
 
         return u''.join(text)

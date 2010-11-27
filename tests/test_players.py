@@ -16,7 +16,7 @@ class TestPlayer(unittest.TestCase):
                         stamina=90,
                         offense=48,
                         defense=25)
-        representation = str(player).strip()
+        representation = unicode(player).strip()
 
         assert u"[Player] 10 - Test Player with stats:" in representation
         assert u"speed(key):75" in representation

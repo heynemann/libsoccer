@@ -37,7 +37,7 @@ class TestTeam(unittest.TestCase):
     def test_team_str(self):
         team = Team.generate('Concha Dourada FC')
 
-        team_str = str(team)
+        team_str = unicode(team)
 
         assert 'Concha Dourada FC' in team_str
         assert '\nStarter Players:\n\n' in team_str
